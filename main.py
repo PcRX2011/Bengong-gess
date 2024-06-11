@@ -1,15 +1,27 @@
-meme_dict = {
-            "CRINGE": "Sesuatu yang sangat aneh atau memalukan",
-            "LOL": "Tanggapan umum terhadap sesuatu yang lucu",
-            }
-            
-word = input("Ketik kata yang tidak Kamu mengerti (gunakan huruf kapital semua!): ")
 
-if word in meme_dict.keys():
-    # Apa yang harus kita lakukan jika kata itu ditemukan?
-    print(meme_dict[word])
-    
+import discord
+from fungsi_bengong import gen_pass
+from discord.ext import commands
 
-else:
-    print("Bengong lagi")
-    # Apa yang harus kita lakukan jika kata itu tidak ditemukan?
+intents = discord.Intents.default()
+intents.message_content = True
+
+bot = commands.Bot(command_prefix='$', intents=intents)
+
+@bot.event
+async def on_ready():
+    print(f'We have logged in as {bot.user}')
+
+@bot.command()
+async def hello(ctx):
+    await ctx.send(f'Hi! I am a bot {bot.user}!')
+
+@bot.command()
+async def heh(ctx, count_heh = 5):
+    await ctx.send("he" * count_heh)
+
+@bot.command()
+async def code(ctx, pass_lenght = 10):
+    await ctx.send(gen_pass(pass_lenght))
+
+bot.run("MTI0NzU0OTQyNDM4NTc4NTg4OA.GmbX-j.pvsGAG0U_EtExE577Ni7V5JQxHunIbKeF8fX4g")
